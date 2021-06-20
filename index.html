@@ -24,24 +24,50 @@
 <!--    }-->
 <!--    makeItBigger();-->
 <!--</script>-->
+<!--<script>-->
+<!--    const divId = document.getElementById("123");-->
+<!--    divId.style.width = "300px";-->
+<!--    divId.style.backgroundColor = "#894507";-->
+<!--    const sm = document.getElementById("smail");-->
+<!--    sm.style.width = "50px";-->
+<!--    const makeItBigger = () => {-->
+<!--        sm.style.width = (parseFloat(sm.style.width) + 1) + "px";-->
+<!--        if (parseFloat(sm.style.width) < 300) {-->
+<!--            // window.requestAnimationFrame выполняет колбек каждую перерисовку-->
+<!--            // - то есть 60 раз 1 секунду-->
+<!--            const animId = window.requestAnimationFrame(makeItBigger);-->
+<!--            if (parseFloat(sm.style.width) === 250) {-->
+<!--                // отмена анимации-->
+<!--                window.cancelAnimationFrame(animId);-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--    makeItBigger();-->
+<!--</script>-->
 <script>
-    const divId = document.getElementById("123");
-    divId.style.width = "300px";
-    divId.style.backgroundColor = "#894507";
     const sm = document.getElementById("smail");
     sm.style.width = "50px";
-    const makeItBigger = () => {
-        sm.style.width = (parseFloat(sm.style.width) + 1) + "px";
-        if (parseFloat(sm.style.width) < 300) {
-            // window.requestAnimationFrame выполняет колбек каждую перерисовку
-            // - то есть 60 раз 1 секунду
-            const animId = window.requestAnimationFrame(makeItBigger);
-            if (parseFloat(sm.style.width) === 250) {
-                window.cancelAnimationFrame(animId);
-            }
+    const startTime = new Date().getTime();
+    // аргументом колбека является время прошедшее от создания текущего документа в мс
+    const makeItBigger = (curTimeLn) => {
+        console.log(parseInt(curTimeLn, 10), "  ", startTime);
+        const curTime = new Date().getTime();
+        const newWidth = (50 + (parseInt(curTimeLn, 10)/1000) * 30);
+        sm.style.width = newWidth + "px";
+        if (newWidth < 300) {
+            window.requestAnimationFrame(makeItBigger);
         }
     }
-    makeItBigger();
+    window.requestAnimationFrame(makeItBigger);
 </script>
 </body>
 </html>
+
+<!--
+плюсы requestAnimationFrame:
+
+Когда вкладка скрыта или в скрытом iframe,
+на них совсем не происходит перерисовок,
+и функция не будет вызвана: анимация будет
+приостановлена и не потратит ресурсы. Это хорошо.
+-->
