@@ -8,16 +8,29 @@
 </head>
 <body>
 <img src="https://www.cossa.ru/upload/tmp/images/b894a64b43145ed8efafa929544c3722.jpg" alt="" id="smail" />
+<!--<script>-->
+<!--    const sm = document.getElementById("smail");-->
+<!--    sm.style.width = "50px";-->
+<!--    const startTime = new Date().getTime();-->
+<!--    const makeItBigger = () => {-->
+<!--        const curTime = new Date().getTime();-->
+<!--        const newWidth = (50 + ((curTime - startTime)/1000) * 30);-->
+<!--        sm.style.width = newWidth + "px";-->
+<!--        if (newWidth < 300) {-->
+<!--            // в качестве полифила для старых версий браузеров используется setInterval-->
+<!--            window.requestAnimationFrame(makeItBigger);-->
+<!--        }-->
+<!--    }-->
+<!--    makeItBigger();-->
+<!--</script>-->
 <script>
     const sm = document.getElementById("smail");
     sm.style.width = "50px";
-    const startTime = new Date().getTime();
     const makeItBigger = () => {
-        const curTime = new Date().getTime();
-        const newWidth = (50 + ((curTime - startTime)/1000) * 30);
-        sm.style.width = newWidth + "px";
-        if (newWidth < 300) {
-            // в качестве полифила для старых версий браузеров используется setInterval
+        sm.style.width = (parseFloat(sm.style.width) + 1) + "px";
+        if (parseFloat(sm.style.width) < 300) {
+            // window.requestAnimationFrame выполняет колбек каждую перерисовку
+            // - то есть 60 раз 1 секунду
             window.requestAnimationFrame(makeItBigger);
         }
     }
