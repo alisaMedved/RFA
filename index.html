@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+<div id="123">ghh</div>
 <img src="https://www.cossa.ru/upload/tmp/images/b894a64b43145ed8efafa929544c3722.jpg" alt="" id="smail" />
 <!--<script>-->
 <!--    const sm = document.getElementById("smail");-->
@@ -24,6 +25,9 @@
 <!--    makeItBigger();-->
 <!--</script>-->
 <script>
+    const divId = document.getElementById("123");
+    divId.style.width = "300px";
+    divId.style.backgroundColor = "#894507";
     const sm = document.getElementById("smail");
     sm.style.width = "50px";
     const makeItBigger = () => {
@@ -31,7 +35,10 @@
         if (parseFloat(sm.style.width) < 300) {
             // window.requestAnimationFrame выполняет колбек каждую перерисовку
             // - то есть 60 раз 1 секунду
-            window.requestAnimationFrame(makeItBigger);
+            const animId = window.requestAnimationFrame(makeItBigger);
+            if (parseFloat(sm.style.width) === 250) {
+                window.cancelAnimationFrame(animId);
+            }
         }
     }
     makeItBigger();
