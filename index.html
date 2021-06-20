@@ -17,6 +17,7 @@
         const newWidth = (50 + ((curTime - startTime)/1000) * 30);
         sm.style.width = newWidth + "px";
         if (newWidth < 300) {
+            // в качестве полифила для старых версий браузеров используется setInterval
             window.requestAnimationFrame(makeItBigger);
         }
     }
